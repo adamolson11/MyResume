@@ -87,7 +87,7 @@ if (contactForm) {
     btn.disabled = true;
     btn.textContent = "Sending…";
 
-    // Simulate async submission
+    // Client-side feedback only — no actual form submission to a backend
     setTimeout(() => {
       formNote.textContent =
         "Thanks for your message! I'll get back to you soon.";
