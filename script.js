@@ -32,7 +32,7 @@ navLinks.querySelectorAll("a").forEach((link) => {
 
 // ── Scroll-reveal animations ──────────────────────────────────────────────────
 const revealElements = document.querySelectorAll(
-  ".about-grid, .skill-category, .timeline-item, .project-card, .contact-grid"
+  ".about-grid, .skill-category, .timeline-item, .project-card, .contact-links"
 );
 
 revealElements.forEach((el) => el.classList.add("reveal"));
@@ -75,25 +75,3 @@ sections.forEach((s) => sectionObserver.observe(s));
 // ── Footer year ───────────────────────────────────────────────────────────────
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-// ── Contact form (client-side feedback only) ──────────────────────────────────
-const contactForm = document.getElementById("contactForm");
-const formNote = document.getElementById("formNote");
-
-if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const btn = contactForm.querySelector("button[type='submit']");
-    btn.disabled = true;
-    btn.textContent = "Sending…";
-
-    // Client-side feedback only — no actual form submission to a backend
-    setTimeout(() => {
-      formNote.textContent =
-        "Thanks for your message! I'll get back to you soon.";
-      contactForm.reset();
-      btn.disabled = false;
-      btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-    }, 1000);
-  });
-}
