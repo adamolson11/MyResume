@@ -37,6 +37,23 @@ export function ContactForm({ endpoint }: ContactFormProps) {
       }
     }
 
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+
+    if (
+      typeof name !== "string" ||
+      !name ||
+      typeof email !== "string" ||
+      !email ||
+      typeof message !== "string" ||
+      !message
+    ) {
+      setSubmitState("error");
+      setErrorMessage("Please complete name, email, and message before sending.");
+      return;
+    }
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
