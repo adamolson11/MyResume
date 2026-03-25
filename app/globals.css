@@ -894,10 +894,10 @@ section:nth-child(even) {
 }
 
 .contact-input:focus {
-  border-color: rgba(123, 247, 255, 0.78);
+  border-color: #7bf7ff;
   box-shadow:
-    0 0 0 3px rgba(100, 255, 218, 0.12),
-    0 10px 24px -22px rgba(100, 255, 218, 0.65);
+    0 0 0 3px rgba(123, 247, 255, 0.2),
+    0 10px 24px -22px rgba(123, 247, 255, 0.7);
 }
 
 .contact-input::placeholder {
