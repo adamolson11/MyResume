@@ -89,22 +89,31 @@ export function ContactForm({ endpoint }: ContactFormProps) {
 
   if (!endpointReady) {
     return (
-      <section className="space-y-4 rounded-2xl border border-amber-300 bg-amber-50 p-6">
-        <h2 className="text-xl font-semibold text-slate-900">Send Message</h2>
-        <p className="text-sm leading-6 text-slate-700">
+      <section className="contact-form-card">
+        <h2>Send Message</h2>
+        <p className="contact-form-card__intro">
           Contact form activation is pending Formspree setup. For now, use the
           Copy Email action below.
         </p>
+        <div className="contact-placeholder">
+          <p className="status-message status-message--warning">
+            Formspree endpoint not configured yet. Copy Email remains available.
+          </p>
+        </div>
       </section>
     );
   }
 
   return (
-    <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold text-slate-900">Send Message</h2>
-      <form onSubmit={onSubmit} action={endpoint} method="POST" className="space-y-4">
-        <div className="space-y-1.5">
-          <label htmlFor="name" className="text-sm font-medium text-slate-700">
+    <section className="contact-form-card">
+      <h2>Send Message</h2>
+      <p className="contact-form-card__intro">
+        Use the secure contact form below. Messages continue to submit through
+        the existing Formspree flow.
+      </p>
+      <form onSubmit={onSubmit} action={endpoint} method="POST" className="contact-form">
+        <div className="contact-form-row">
+          <label htmlFor="name">
             Name
           </label>
           <input
@@ -113,12 +122,12 @@ export function ContactForm({ endpoint }: ContactFormProps) {
             type="text"
             required
             autoComplete="name"
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-slate-500"
+            className="contact-input"
           />
         </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-slate-700">
+        <div className="contact-form-row">
+          <label htmlFor="email">
             Email
           </label>
           <input
@@ -127,12 +136,12 @@ export function ContactForm({ endpoint }: ContactFormProps) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-slate-500"
+            className="contact-input"
           />
         </div>
 
-        <div className="space-y-1.5">
-          <label htmlFor="message" className="text-sm font-medium text-slate-700">
+        <div className="contact-form-row">
+          <label htmlFor="message">
             Message
           </label>
           <textarea
@@ -140,27 +149,27 @@ export function ContactForm({ endpoint }: ContactFormProps) {
             name="message"
             required
             rows={6}
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-slate-500"
+            className="contact-input"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitState === "submitting"}
-          className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-500"
+          className="btn btn-primary"
         >
           {submitState === "submitting" ? "Sending..." : "Send Message"}
         </button>
       </form>
 
-      <div aria-live="polite" className="text-sm">
+      <div aria-live="polite" className="contact-status">
         {submitState === "success" && (
-          <p className="rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-emerald-800">
+          <p className="status-message status-message--success">
             Message sent successfully.
           </p>
         )}
         {submitState === "error" && (
-          <p className="rounded-lg border border-rose-300 bg-rose-50 px-3 py-2 text-rose-800">
+          <p className="status-message status-message--error">
             {errorMessage}
           </p>
         )}

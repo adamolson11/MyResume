@@ -24,23 +24,21 @@ export function ContactActions({ compact = false, dark = false }: ContactActions
     }, 1800);
   }
 
-  const groupClass = compact ? "flex flex-wrap gap-2" : "flex flex-wrap gap-3";
-  const buttonClass = dark
-    ? "rounded-full border border-slate-500 px-4 py-2 text-sm font-medium text-slate-100 transition-colors hover:border-slate-300 hover:bg-slate-800"
-    : "rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900";
-  const subtleClass = dark ? "text-xs text-slate-300" : "text-xs text-slate-500";
-
   return (
-    <div className="space-y-2">
-      <div className={groupClass}>
-        <button type="button" onClick={onCopyEmail} className={buttonClass}>
+    <div
+      className={`contact-actions${compact ? " contact-actions--compact" : ""}${
+        dark ? " contact-actions--dark" : ""
+      }`}
+    >
+      <div className="contact-actions__group">
+        <button type="button" onClick={onCopyEmail} className="contact-action-button">
           Copy Email
         </button>
         <a
           href={LINKEDIN_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className={buttonClass}
+          className="contact-action-button"
         >
           LinkedIn
         </a>
@@ -48,12 +46,12 @@ export function ContactActions({ compact = false, dark = false }: ContactActions
           href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className={buttonClass}
+          className="contact-action-button"
         >
           GitHub
         </a>
       </div>
-      <div className={subtleClass} aria-live="polite">
+      <div className="contact-actions__meta" aria-live="polite">
         {copyState === "copied" && "Email copied to clipboard."}
         {copyState === "failed" && "Could not copy email automatically. Use Email Fallback."}
         {copyState === "idle" && (
