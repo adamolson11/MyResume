@@ -10,3 +10,5 @@ export const GITHUB_URL =
 export const LINKEDIN_URL =
   process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() ??
   "https://www.linkedin.com/in/adam-olson";
+
+export const RESUME_URL = process.env.NEXT_PUBLIC_RESUME_URL?.trim() ?? "";

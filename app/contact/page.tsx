@@ -1,35 +1,82 @@
 import Link from "next/link";
 import { ContactActions } from "@/app/components/ContactActions";
 import { ContactForm } from "@/app/components/ContactForm";
-import { FORMSPREE_ENDPOINT } from "@/app/lib/contact";
+import {
+  CONTACT_EMAIL,
+  FORMSPREE_ENDPOINT,
+  GITHUB_URL,
+  LINKEDIN_URL,
+  RESUME_URL,
+} from "@/app/lib/contact";
 
 export default function ContactPage() {
   return (
-    <main className="flex flex-1">
-      <div className="mx-auto grid w-full max-w-5xl gap-8 px-6 py-12 lg:grid-cols-5">
-        <section className="space-y-5 rounded-3xl bg-slate-900 p-8 text-slate-100 lg:col-span-2">
-          <p className="text-xs font-semibold tracking-[0.18em] text-slate-300 uppercase">
-            Contact
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight">Let&apos;s Connect</h1>
-          <p className="text-sm leading-7 text-slate-200">
-            I&apos;m currently open to remote QA, application support, technical
-            support, and IT support opportunities. The best way to reach me is
-            through the contact form below.
-          </p>
-          <ContactActions dark />
-          <Link
-            href="/"
-            className="inline-block text-sm text-slate-300 underline underline-offset-4 transition-colors hover:text-white"
-          >
-            Back to Home
-          </Link>
-        </section>
+    <main className="contact-route">
+      <section>
+        <div className="container">
+          <div className="contact-page-grid">
+            <section className="contact-page-intro">
+              <span className="eyebrow">Contact</span>
+              <h1 className="page-title">Let&apos;s Connect</h1>
+              <p className="page-copy">
+                I&apos;m currently open to remote QA, application support, technical
+                support, and IT support opportunities. This page keeps the existing
+                Formspree contact flow intact while offering direct fallback options.
+              </p>
+              <div className="contact-links">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="contact-link-card">
+                  <span className="contact-link-card__icon">@</span>
+                  <span>
+                    <strong>Email</strong>
+                    {CONTACT_EMAIL}
+                  </span>
+                </a>
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+                  <span className="contact-link-card__icon">in</span>
+                  <span>
+                    <strong>LinkedIn</strong>
+                    Professional profile and networking
+                  </span>
+                </a>
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+                  <span className="contact-link-card__icon">GH</span>
+                  <span>
+                    <strong>GitHub</strong>
+                    View projects and recent work
+                  </span>
+                </a>
+                {RESUME_URL ? (
+                  <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="contact-link-card">
+                    <span className="contact-link-card__icon">PDF</span>
+                    <span>
+                      <strong>Resume PDF</strong>
+                      Download the latest resume
+                    </span>
+                  </a>
+                ) : (
+                  <div className="contact-link-card contact-link-card--static">
+                    <span className="contact-link-card__icon">…</span>
+                    <span>
+                      <strong>Resume</strong>
+                      Resume PDF is not wired yet and is available on request.
+                    </span>
+                  </div>
+                )}
+              </div>
+              <ContactActions dark />
+              <p>
+                <Link href="/" className="text-link">
+                  Back to Home
+                </Link>
+              </p>
+            </section>
 
-        <div className="space-y-4 lg:col-span-3">
-          <ContactForm endpoint={FORMSPREE_ENDPOINT} />
+            <div>
+              <ContactForm endpoint={FORMSPREE_ENDPOINT} />
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
